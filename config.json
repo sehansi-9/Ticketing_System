@@ -1,0 +1,3 @@
+{"ticketPool":{"event":"concert","maxTicketCapacity":20,"totalTickets":0,"tickets":[],"customerRetrievalRate":2000,"ticketReleaseRate":3000},
+  "vendors":[{"vendorID":1,"vendorName":"va","ticketBatchSize":7},{"vendorID":2,"vendorName":"vb","ticketBatchSize":8},{"vendorID":3,"vendorName":"vc","ticketBatchSize":9}],
+  "customers":[{"customerID":1,"customerName":"ca","ticketBatchSize":5},{"customerID":2,"customerName":"cb","ticketBatchSize":11}]}
