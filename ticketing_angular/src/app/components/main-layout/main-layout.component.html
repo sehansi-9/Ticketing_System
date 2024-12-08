@@ -1,0 +1,8 @@
+<h1>Ticketing System</h1>
+<div class="ticket-info">
+    <h2>Ticket Pool Information</h2>
+    <p><strong>Max Ticket Capacity:</strong> {{ maxTicketCapacity }}</p>
+    <p><strong>Ticket Release Rate:</strong> every {{ ticketReleaseRate }} seconds </p>
+    <p><strong>Customer Retrieval Rate:</strong> every {{ customerRetrievalRate }} seconds</p>
+  </div>
+  <app-configuration-form [maxCapacity]="maxTicketCapacity"></app-configuration-form>
