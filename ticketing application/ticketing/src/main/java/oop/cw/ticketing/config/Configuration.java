@@ -14,8 +14,8 @@ import java.util.List;
 
 public class Configuration {
     private TicketPool ticketPool;
-    private List<Vendor> vendors = new ArrayList<>();
-    private List<Customer> customers = new ArrayList<>();
+    private final List<Vendor> vendors = new ArrayList<>();
+    private final List<Customer> customers = new ArrayList<>();
 
     // Getters and setters
 
@@ -38,6 +38,7 @@ public class Configuration {
     public void addCustomer(Customer customer) {
         this.customers.add(customer);
     }
+
 
     public void saveToFile(String fileName) {
         Gson gson = new Gson();

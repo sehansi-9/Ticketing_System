@@ -8,14 +8,14 @@ public class Customer implements Runnable {
     private final int customerID;
     private String customerName;
     private int ticketBatchSize;
-    private boolean[] stopFlag;
 
-    public Customer(TicketPool ticketpool, int id, String customerName, int ticketBatchSize, boolean[] stopFlag) {
+
+    public Customer(TicketPool ticketpool, int id, String customerName, int ticketBatchSize) {
         this.ticketpool = ticketpool;
         customerID = id;
         this.customerName = customerName;
         this.ticketBatchSize = ticketBatchSize;
-        this.stopFlag = stopFlag;
+
     }
 
     public Customer(int customerID, String name, int ticketAmount) {
@@ -45,11 +45,12 @@ public class Customer implements Runnable {
 
     @Override
     public void run() {
+        int ticketsPurchasedByBuyer = 0;
         try {
-            while (!stopFlag[0]) { // Keep running until stopFlag is true
-                int ticketsPurchasedByBuyer = 0;
 
-                while (ticketsPurchasedByBuyer < ticketBatchSize && !ticketpool.isSoldOut() && !stopFlag[0]) {
+
+
+                while (ticketsPurchasedByBuyer < ticketBatchSize && !ticketpool.isSoldOut() ) {
                     boolean removed = ticketpool.removeTicket(customerName);
                     if (removed) {
                         ticketsPurchasedByBuyer++;
@@ -59,16 +60,13 @@ public class Customer implements Runnable {
                     Thread.sleep(ticketpool.getCustomerRetrievalRate()); // Simulate time for ticket purchase
                 }
 
-                Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + customerName + " purchased " + ticketsPurchasedByBuyer + " tickets from " + ticketBatchSize + " requested.");
-
-                if (ticketpool.isSoldOut() || stopFlag[0]) {
-                    break;
-                }
-
-            }
         } catch (InterruptedException e) {
             System.out.println(customerName + " was interrupted and is stopping.");
             System.out.println(customerName + " has stopped.");
+
+        }
+        finally{
+            Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + customerName + " purchased " + ticketsPurchasedByBuyer + " tickets from " + ticketBatchSize + " requested.");
         }
     }
 

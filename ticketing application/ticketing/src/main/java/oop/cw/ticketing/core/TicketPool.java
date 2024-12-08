@@ -45,16 +45,14 @@ public class TicketPool {
     public synchronized boolean removeTicket(String buyer) {
         while (tickets.isEmpty()) {
             try {
-                Logger.log("No tickets available currently, Waiting...");
-                wait(1000);
+                Logger.log("No tickets available currently, Please wait...");
+                wait(4000);
                 if (isSoldOut()) {
                     return false;
                 }
                 if (tickets.isEmpty()) {
                     return false;
                 }
-
-
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return false;

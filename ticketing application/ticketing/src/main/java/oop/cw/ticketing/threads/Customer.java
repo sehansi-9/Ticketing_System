@@ -10,21 +10,18 @@ import org.springframework.stereotype.Component;
 public class Customer implements Runnable {
     private TicketPool ticketpool;
     private final int customerID;
-    private String customerName;
-    private int ticketBatchSize;
-    private boolean[] stopFlag;
+    private final String customerName;
+    private final int ticketBatchSize;
 
     @Autowired
     public Customer(TicketPool ticketpool,
                     @Value("${customer.id}") int customerID,
                     @Value("${customer.name}") String customerName,
-                    @Value("${customer.ticketBatchSize}") int ticketBatchSize,
-                    @Value("${customer.stopFlag}") boolean[] stopFlag)  {
+                    @Value("${customer.ticketBatchSize}") int ticketBatchSize)  {
         this.ticketpool = ticketpool;
         this.customerID = customerID;
         this.customerName = customerName;
         this.ticketBatchSize = ticketBatchSize;
-        this.stopFlag = stopFlag;
     }
 
     public Customer(int customerID, String name, int ticketAmount) {
@@ -34,43 +31,15 @@ public class Customer implements Runnable {
 
     }
 
-    public int getCustomerID() {
-        return customerID;
-    }
-    public String getCustomerName() {
-        return customerName;
-    }
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public int getTicketBatchSize() {
-        return ticketBatchSize;
-    }
-    public void setTicketBatchSize(int ticketBatchSize) {
-        this.ticketBatchSize = ticketBatchSize;
-    }
-
-    public TicketPool getTicketPool() {
-        return ticketpool;
-    }
-
-    public void setTicketPool(TicketPool ticketpool) {
+      public void setTicketPool(TicketPool ticketpool) {
         this.ticketpool = ticketpool;
     }
 
-    public boolean[] getStopFlag() {
-        return stopFlag;
-    }
-
-
     @Override
     public void run() {
+        int ticketsPurchasedByBuyer = 0;
         try {
-            while (!stopFlag[0]) { // Keep running until stopFlag is true
-                int ticketsPurchasedByBuyer = 0;
-
-                while (ticketsPurchasedByBuyer < ticketBatchSize && !ticketpool.isSoldOut() && !stopFlag[0]) {
+                while (ticketsPurchasedByBuyer < ticketBatchSize && !ticketpool.isSoldOut()) {
                     boolean removed = ticketpool.removeTicket(customerName);
                     if (removed) {
                         ticketsPurchasedByBuyer++;
@@ -80,17 +49,17 @@ public class Customer implements Runnable {
                     Thread.sleep(ticketpool.getCustomerRetrievalRate()); // Simulate time for ticket purchase
                 }
 
-                Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + customerName + " purchased " + ticketsPurchasedByBuyer + " tickets from " + ticketBatchSize + " requested.");
-
-                if (ticketpool.isSoldOut() || stopFlag[0]) {
-                    break;
-                }
-
-            }
         } catch (InterruptedException e) {
             System.out.println(customerName + " was interrupted and is stopping.");
             System.out.println(customerName + " has stopped.");
         }
+        finally{
+            Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + customerName + " purchased " + ticketsPurchasedByBuyer + " tickets from " + ticketBatchSize + " requested.");
+        }
+
     }
+
+
+
 
 }

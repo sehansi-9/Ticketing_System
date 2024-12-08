@@ -8,15 +8,15 @@ public class Vendor implements Runnable {
     private final int vendorID;
     private String vendorName;
     private int ticketBatchSize;
-    private boolean[] stopFlag;
 
 
-    public Vendor(TicketPool ticketpool, int id, String vendorName, int ticketBatchSize, boolean[] stopFlag) {
+
+    public Vendor(TicketPool ticketpool, int id, String vendorName, int ticketBatchSize) {
         this.ticketpool = ticketpool;
         this.vendorID = id;
         this.vendorName = vendorName;
         this.ticketBatchSize = ticketBatchSize;
-        this.stopFlag = stopFlag;
+
     }
 
     public Vendor(int vendorID, String name, int ticketAmount) {
@@ -45,11 +45,10 @@ public class Vendor implements Runnable {
 
     @Override
     public void run() {
+        int ticketsReleasedByVendor = 0;
         try {
-            while (!stopFlag[0]) {
-                int ticketsReleasedByVendor = 0;
 
-                while (ticketsReleasedByVendor < ticketBatchSize && !ticketpool.isPoolFull() && !stopFlag[0]) {
+                while (ticketsReleasedByVendor < ticketBatchSize && !ticketpool.isPoolFull() ) {
                     boolean added = ticketpool.addTicket(vendorName);
                     if (added) {
                         ticketsReleasedByVendor++;
@@ -59,15 +58,13 @@ public class Vendor implements Runnable {
                     Thread.sleep(ticketpool.getTicketReleaseRate()); // Simulate time for ticket release
                 }
 
-                Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + vendorName + " released " + ticketsReleasedByVendor + " from a batch of "+ ticketBatchSize);
 
-                if (ticketpool.isPoolFull() || stopFlag[0]) {
-                    break;
-                }
-            }
         } catch (InterruptedException e) {
             System.out.println(vendorName + " was interrupted and is stopping.");
             System.out.println(vendorName + " has stopped.");
+        }
+        finally{
+            Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + vendorName + " released " + ticketsReleasedByVendor + " tickets from a batch of " + ticketBatchSize);
         }
     }
 

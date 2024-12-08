@@ -5,9 +5,12 @@ import oop.cw.ticketing.config.Configuration;
 import oop.cw.ticketing.core.TicketPool;
 import oop.cw.ticketing.threads.Customer;
 import oop.cw.ticketing.threads.Vendor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @Service
 public class TicketManagerService {
@@ -17,18 +20,22 @@ public class TicketManagerService {
     private List<Vendor> vendors;
 
     // Constructor injection for TicketPool
+    @Autowired
     public TicketManagerService(TicketPool ticketPool) {
+
         this.ticketPool = ticketPool;
     }
+    ArrayList<Thread> threadList = new ArrayList<>();
 
-    // Step 1: Initialize by loading the configuration
     @PostConstruct
     public void init() {
         try {
-            // Load the configuration from the JSON file
             Configuration config = Configuration.loadFromFile("../config.json");
             if (config != null) {
-                // Set the ticket pool from config if available
+                ticketPool.setEvent(config.getTicketPool().getEvent());
+                ticketPool.setMaxTicketCapacity(config.getTicketPool().getMaxTicketCapacity());
+                ticketPool.setCustomerRetrievalRate(config.getTicketPool().getCustomerRetrievalRate());
+                ticketPool.setTicketReleaseRate(config.getTicketPool().getTicketReleaseRate());
                 this.customers = config.getCustomers();
                 this.vendors = config.getVendors();
 
@@ -38,28 +45,44 @@ public class TicketManagerService {
         }
     }
 
-    // Step 2: Start the customer and vendor threads
-    public void startThreads() {
-        // Start vendor threads
+        public void startThreads() {
         for (Vendor vendor : vendors) {
             vendor.setTicketPool(ticketPool);
-            new Thread(vendor).start();
+            Thread thread = new Thread(vendor);
+            threadList.add(thread);
         }
 
-        // Start customer threads
         for (Customer customer : customers) {
             customer.setTicketPool(ticketPool);
-            new Thread(customer).start();
+            Thread thread = new Thread(customer);
+            threadList.add(thread);
         }
+
+            for (Thread thread : threadList) {
+                thread.start();
+            }
+            for (Thread thread : threadList) {
+                try {
+                    thread.join();
+                }
+                catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+
+
+    }
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 
-    // Optional: Stop threads if needed
+    public void setVendors(List<Vendor> vendors) {
+        this.vendors = vendors;
+    }
     public void stopThreads() {
-        for (Customer customer : customers) {
-            customer.getStopFlag()[0] = true;
-        }
-        for (Vendor vendor : vendors) {
-            vendor.getStopFlag()[0] = true;
+
+        for (Thread thread : threadList) {
+            thread.interrupt();
         }
     }
 }
