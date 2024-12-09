@@ -1,5 +1,7 @@
 package oop.cw.ticketing.logging;
 
+import oop.cw.ticketing.exceptions.LoggerException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ public class Logger {
             writer.write(timeStampedMessage);
             writer.newLine();
         } catch (IOException e) {
-            e.printStackTrace(); // Log the error if writing to the file fails
+           throw new LoggerException(e.getMessage()); // Log the error if writing to the file fails
         }
     }
 }

@@ -47,9 +47,6 @@ public class Customer implements Runnable {
     public void run() {
         int ticketsPurchasedByBuyer = 0;
         try {
-
-
-
                 while (ticketsPurchasedByBuyer < ticketBatchSize && !ticketpool.isSoldOut() ) {
                     boolean removed = ticketpool.removeTicket(customerName);
                     if (removed) {

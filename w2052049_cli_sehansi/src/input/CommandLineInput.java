@@ -20,6 +20,13 @@ public class CommandLineInput {
             Configuration config = Configuration.loadFromFile(fileName);
             if (config != null) {
                 System.out.println("Configuration file found. Loading...");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Do you need to enter new details instead? (y/n)");
+                String option = scanner.nextLine();
+                if (option.equals("y")) {
+                    config.clear(fileName);
+                    return collectInputAndSave(fileName);
+                }
                 return config;
             } else {
                 return collectInputAndSave(fileName);
@@ -101,7 +108,7 @@ public class CommandLineInput {
                     }
                     scanner.nextLine(); // Consume the leftover newline
                 } else {
-                    System.out.println("Error: Invalid input. Please enter a valid integer.");
+                    System.out.println("Error: Invalid input. Please enter a valid number.");
                     scanner.next(); // Consume invalid input
                 }
             }

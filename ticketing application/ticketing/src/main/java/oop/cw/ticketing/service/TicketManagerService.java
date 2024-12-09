@@ -3,6 +3,8 @@ package oop.cw.ticketing.service;
 import jakarta.annotation.PostConstruct;
 import oop.cw.ticketing.config.Configuration;
 import oop.cw.ticketing.core.TicketPool;
+import oop.cw.ticketing.exceptions.ConfigurationException;
+import oop.cw.ticketing.exceptions.ThreadManagementException;
 import oop.cw.ticketing.threads.Customer;
 import oop.cw.ticketing.threads.Vendor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Service
 public class TicketManagerService {
@@ -41,11 +42,11 @@ public class TicketManagerService {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ConfigurationException(e.getMessage());
         }
     }
 
-        public void startThreads() {
+        public void startThreads() throws ThreadManagementException {
         for (Vendor vendor : vendors) {
             vendor.setTicketPool(ticketPool);
             Thread thread = new Thread(vendor);
@@ -67,6 +68,8 @@ public class TicketManagerService {
                 }
                 catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
+                    throw new ThreadManagementException("The threads are interrupted -"+e.getMessage());
+
                 }
             }
 

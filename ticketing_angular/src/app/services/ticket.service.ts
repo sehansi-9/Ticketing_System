@@ -7,8 +7,8 @@ import { isPlatformBrowser } from '@angular/common'; //to stop httpclient from a
 })
 export class TicketService {
   private apiUrl = 'http://localhost:8080/api/info'; 
-  private addCustomerUrl = 'http://localhost:8080/api/addcustomer';  // URL to add a customer
-  private addVendorUrl = 'http://localhost:8080/api/addvendor';      // URL to add a vendor
+  private addCustomerUrl = 'http://localhost:8080/api/addcustomer'; 
+  private addVendorUrl = 'http://localhost:8080/api/addvendor';      
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 

@@ -3,12 +3,14 @@ package config;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import core.TicketPool;
+import exceptions.ConfigurationException;
 import threads.Customer;
 import threads.Vendor;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.rmi.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class Configuration {
         try (FileWriter writer = new FileWriter(fileName)) {
             gson.toJson(this, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+           throw new ConfigurationException("Saving to file failed");
         }
     }
 
@@ -56,8 +58,15 @@ public class Configuration {
         try (FileReader reader = new FileReader(fileName)) {
             return gson.fromJson(reader, Configuration.class);
         } catch (IOException | JsonSyntaxException e) {
-            e.printStackTrace();
-            return null;
+            throw new ConfigurationException("Loading from file failed");
+        }
+    }
+
+    public void clear(String fileName) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            // clearing the file
+        } catch (IOException e) {
+            throw new ConfigurationException("Clearing the file failed");
         }
     }
 }

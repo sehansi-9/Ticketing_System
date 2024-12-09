@@ -1,5 +1,6 @@
 import config.Configuration;
 import core.TicketPool;
+import exceptions.ThreadManagementException;
 import input.CommandLineInput;
 import threads.Customer;
 import threads.Vendor;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws ThreadManagementException {
 
         System.out.println("Welcome to Ticketing Site!");
         Configuration info = CommandLineInput.initializeConfiguration("../config.json");
@@ -37,7 +38,6 @@ public class Main {
         Thread stopCommandThread = new Thread() {
             @Override
             public void run() {
-                boolean stopFlag = false;
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Type 'x' and enter key to stop the system ");
                     String command = scanner.next();
@@ -61,8 +61,14 @@ public class Main {
             for (Thread thread : threadList) {
                 thread.start();
             }
+
             stopCommandThread.start();
-            stopCommandThread.join();
+            try {
+                stopCommandThread.join();
+            }
+            catch (InterruptedException e) {
+                throw new ThreadManagementException("Error while joining the stop command thread");
+            }
 
             for (Thread thread : threadList) {
                 try {
@@ -70,6 +76,7 @@ public class Main {
                 }
                 catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
+                    throw new ThreadManagementException("Error while joining customer and vendor threads"+e.getMessage());
                 }
             }
 

@@ -3,6 +3,7 @@ package oop.cw.ticketing.config;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import oop.cw.ticketing.core.TicketPool;
+import oop.cw.ticketing.exceptions.ConfigurationException;
 import oop.cw.ticketing.threads.Customer;
 import oop.cw.ticketing.threads.Vendor;
 
@@ -40,22 +41,21 @@ public class Configuration {
     }
 
 
-    public void saveToFile(String fileName) {
+    public void saveToFile(String fileName)  {
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(fileName)) {
             gson.toJson(this, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ConfigurationException("Reading to file failed");
         }
     }
 
-    public static Configuration loadFromFile(String fileName) {
+    public static Configuration loadFromFile(String fileName)  {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(fileName)) {
             return gson.fromJson(reader, Configuration.class);
         } catch (IOException | JsonSyntaxException e) {
-            e.printStackTrace();
-            return null;
+            throw new ConfigurationException("File loading failed");
         }
     }
 }
