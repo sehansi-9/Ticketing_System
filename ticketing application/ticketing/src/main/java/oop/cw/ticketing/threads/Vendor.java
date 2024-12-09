@@ -47,8 +47,7 @@ public class Vendor implements Runnable {
                     Thread.sleep(ticketpool.getTicketReleaseRate()); // Simulate time for ticket release
                 }
         } catch (InterruptedException e) {
-            System.out.println(vendorName + " was interrupted and is stopping.");
-            System.out.println(vendorName + " has stopped.");
+            System.out.println(vendorName + " was interrupted and has stopped.");
         }finally{
             Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + vendorName + " released " + ticketsReleasedByVendor + " from a batch of "+ ticketBatchSize);
         }

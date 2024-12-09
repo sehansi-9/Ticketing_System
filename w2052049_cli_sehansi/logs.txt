@@ -160,3 +160,110 @@
 2024-12-09T11:19:50.314106100: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: work released 3 tickets from a batch of 3
 2024-12-09T11:19:50.320317400: No tickets available currently, Please wait...
 2024-12-09T11:19:51.331595300: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: ane purchased 3 tickets from 4 requested.
+2024-12-09T12:58:37.265029900: pls released 1 ticket. Total tickets in pool: 1
+2024-12-09T12:58:37.322198100: deyyane purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T12:58:37.322896300: No tickets available currently, Please wait...
+2024-12-09T12:58:37.322896300: work released 1 ticket. Total tickets in pool: 1
+2024-12-09T12:58:38.333995900: ane purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T12:58:39.143125900: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: work released 1 tickets from a batch of 3
+2024-12-09T12:58:39.143125900: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: pls released 1 tickets from a batch of 2
+2024-12-09T12:58:39.143125900: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: deyyane purchased 1 tickets from 5 requested.
+2024-12-09T12:58:39.143125900: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: ane purchased 1 tickets from 4 requested.
+2024-12-09T16:17:24.645908700: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T16:17:24.663920700: Customer B purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T16:17:24.664451600: No tickets available currently, Please wait...
+2024-12-09T16:17:24.664451600: Vendor C released 1 ticket. Total tickets in pool: 1
+2024-12-09T16:17:24.665429700: Vendor B released 1 ticket. Total tickets in pool: 2
+2024-12-09T16:17:25.664879500: Customer A purchased 1 ticket. Total tickets in pool: 1
+2024-12-09T16:17:26.663912100: Vendor A released 1 ticket. Total tickets in pool: 2
+2024-12-09T16:17:26.667295100: Vendor C released 1 ticket. Total tickets in pool: 3
+2024-12-09T16:17:26.667992200: Vendor B released 1 ticket. Total tickets in pool: 4
+2024-12-09T16:17:27.665049600: Customer B purchased 1 ticket. Total tickets in pool: 3
+2024-12-09T16:17:28.666296900: Customer A purchased 1 ticket. Total tickets in pool: 2
+2024-12-09T16:17:28.667112800: Vendor A released 1 ticket. Total tickets in pool: 3
+2024-12-09T16:17:28.669291: Vendor C released 1 ticket. Total tickets in pool: 4
+2024-12-09T16:17:28.680690100: Vendor B released 1 ticket. Total tickets in pool: 5
+2024-12-09T16:17:30.669080200: Vendor A released 1 ticket. Total tickets in pool: 6
+2024-12-09T16:17:30.673192: Customer B purchased 1 ticket. Total tickets in pool: 5
+2024-12-09T16:17:30.674631600: Vendor C released 1 ticket. Total tickets in pool: 6
+2024-12-09T16:17:30.688306500: Vendor B released 1 ticket. Total tickets in pool: 7
+2024-12-09T16:17:30.874219100: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer A purchased 2 tickets from 13 requested.
+2024-12-09T16:17:30.874219100: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor A released 4 tickets from a batch of 13
+2024-12-09T16:17:30.874219100: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor B released 4 tickets from a batch of 6
+2024-12-09T16:17:30.874219100: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor C released 4 tickets from a batch of 9
+2024-12-09T16:17:30.874219100: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer B purchased 3 tickets from 14 requested.
+2024-12-09T17:05:51.138814: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:05:51.160373: New Customer purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:05:51.160373: No tickets available currently, Please wait...
+2024-12-09T17:05:51.161371500: No tickets available currently, Please wait...
+2024-12-09T17:05:51.162393700: Vendor C released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:05:51.162393700: Vendor B released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:05:52.162175: Customer B purchased 1 ticket. Total tickets in pool: 1
+2024-12-09T17:05:52.163170100: Customer A purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:05:53.160384700: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:05:53.171665600: Vendor B released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:05:53.172604700: Vendor C released 1 ticket. Total tickets in pool: 3
+2024-12-09T17:05:54.161812900: New Customer purchased 1 ticket. Total tickets in pool: 2
+2024-12-09T17:05:54.890499700: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer B purchased 1 tickets from 14 requested.
+2024-12-09T17:05:54.890499700: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor B released 2 tickets from a batch of 6
+2024-12-09T17:05:54.890499700: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor C released 2 tickets from a batch of 9
+2024-12-09T17:05:54.890499700: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer A purchased 1 tickets from 13 requested.
+2024-12-09T17:05:54.890499700: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor A released 2 tickets from a batch of 13
+2024-12-09T17:05:54.890499700: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: New Customer purchased 2 tickets from 6 requested.
+2024-12-09T17:06:21.325375200: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:06:21.335454300: New Customer purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:06:21.336604500: No tickets available currently, Please wait...
+2024-12-09T17:06:21.336604500: Vendor B released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:06:21.337342: Vendor C released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:06:21.337342: Customer B purchased 1 ticket. Total tickets in pool: 1
+2024-12-09T17:06:22.037323400: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor A released 1 tickets from a batch of 13
+2024-12-09T17:06:22.037323400: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: New Customer purchased 1 tickets from 6 requested.
+2024-12-09T17:06:22.037323400: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor C released 1 tickets from a batch of 9
+2024-12-09T17:06:22.037323400: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer A purchased 0 tickets from 13 requested.
+2024-12-09T17:06:22.037323400: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer B purchased 1 tickets from 14 requested.
+2024-12-09T17:06:22.037932500: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor B released 1 tickets from a batch of 6
+2024-12-09T17:07:37.812362800: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:07:37.825232: New Customer purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:07:37.826230600: Vendor C released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:07:37.826230600: Customer A purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:07:37.826230600: No tickets available currently, Please wait...
+2024-12-09T17:07:37.827242500: Vendor B released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:07:38.831242100: Customer B purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:07:39.825235900: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:07:39.826649200: Vendor C released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:07:39.829240500: Vendor B released 1 ticket. Total tickets in pool: 3
+2024-12-09T17:07:40.826377700: New Customer purchased 1 ticket. Total tickets in pool: 2
+2024-12-09T17:07:40.827528200: Customer A purchased 1 ticket. Total tickets in pool: 1
+2024-12-09T17:07:41.834750400: Vendor C released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:07:41.835510400: Vendor B released 1 ticket. Total tickets in pool: 3
+2024-12-09T17:07:41.837322100: Customer B purchased 1 ticket. Total tickets in pool: 2
+2024-12-09T17:07:41.838310100: Vendor A released 1 ticket. Total tickets in pool: 3
+2024-12-09T17:07:43.828259200: New Customer purchased 1 ticket. Total tickets in pool: 2
+2024-12-09T17:07:43.830245200: Customer A purchased 1 ticket. Total tickets in pool: 1
+2024-12-09T17:07:43.836234800: Vendor C released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:07:43.845552500: Vendor A released 1 ticket. Total tickets in pool: 3
+2024-12-09T17:07:43.846401: Vendor B released 1 ticket. Total tickets in pool: 4
+2024-12-09T17:08:12.842731800: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:08:12.848666900: New Customer purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:08:12.848666900: No tickets available currently, Please wait...
+2024-12-09T17:08:12.849663500: Vendor C released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:08:12.849663500: Vendor B released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:08:12.850662: Customer B purchased 1 ticket. Total tickets in pool: 1
+2024-12-09T17:08:13.104149800: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor A released 1 tickets from a batch of 13
+2024-12-09T17:08:13.104149800: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer A purchased 0 tickets from 13 requested.
+2024-12-09T17:08:13.104149800: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor B released 1 tickets from a batch of 6
+2024-12-09T17:08:13.105030300: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: New Customer purchased 1 tickets from 6 requested.
+2024-12-09T17:08:13.105030300: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor C released 1 tickets from a batch of 9
+2024-12-09T17:08:13.104804700: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer B purchased 1 tickets from 14 requested.
+2024-12-09T17:10:06.546139800: Vendor A released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:10:06.593991200: New Customer purchased 1 ticket. Total tickets in pool: 0
+2024-12-09T17:10:06.593991200: No tickets available currently, Please wait...
+2024-12-09T17:10:06.594989100: Vendor C released 1 ticket. Total tickets in pool: 1
+2024-12-09T17:10:06.594989100: Vendor B released 1 ticket. Total tickets in pool: 2
+2024-12-09T17:10:06.595985900: Customer B purchased 1 ticket. Total tickets in pool: 1
+2024-12-09T17:10:06.936120500: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor C released 1 tickets from a batch of 9
+2024-12-09T17:10:06.936120500: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: New Customer purchased 1 tickets from 6 requested.
+2024-12-09T17:10:06.936120500: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer A purchased 0 tickets from 13 requested.
+2024-12-09T17:10:06.936120500: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Customer B purchased 1 tickets from 14 requested.
+2024-12-09T17:10:06.936120500: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor B released 1 tickets from a batch of 6
+2024-12-09T17:10:06.937033900: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: Vendor A released 1 tickets from a batch of 13

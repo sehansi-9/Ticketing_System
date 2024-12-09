@@ -50,8 +50,7 @@ public class Customer implements Runnable {
                 }
 
         } catch (InterruptedException e) {
-            System.out.println(customerName + " was interrupted and is stopping.");
-            System.out.println(customerName + " has stopped.");
+            System.out.println(customerName + " was interrupted and has stopped.");
         }
         finally{
             Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + customerName + " purchased " + ticketsPurchasedByBuyer + " tickets from " + ticketBatchSize + " requested.");

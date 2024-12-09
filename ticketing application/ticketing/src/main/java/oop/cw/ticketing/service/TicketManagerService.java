@@ -26,6 +26,11 @@ public class TicketManagerService {
 
         this.ticketPool = ticketPool;
     }
+    private volatile boolean isSystemRunning = false;
+
+    public boolean isSystemRunning() {
+        return isSystemRunning;
+    }
     ArrayList<Thread> threadList = new ArrayList<>();
 
     @PostConstruct
@@ -47,31 +52,39 @@ public class TicketManagerService {
     }
 
         public void startThreads() throws ThreadManagementException {
-        for (Vendor vendor : vendors) {
-            vendor.setTicketPool(ticketPool);
-            Thread thread = new Thread(vendor);
-            threadList.add(thread);
-        }
+        try {
+            for (Vendor vendor : vendors) {
+                vendor.setTicketPool(ticketPool);
+                Thread thread = new Thread(vendor);
+                threadList.add(thread);
+            }
 
-        for (Customer customer : customers) {
-            customer.setTicketPool(ticketPool);
-            Thread thread = new Thread(customer);
-            threadList.add(thread);
-        }
+            for (Customer customer : customers) {
+                customer.setTicketPool(ticketPool);
+                Thread thread = new Thread(customer);
+                threadList.add(thread);
+            }
 
             for (Thread thread : threadList) {
                 thread.start();
             }
-            for (Thread thread : threadList) {
+            new Thread(() -> {
                 try {
-                    thread.join();
-                }
-                catch (InterruptedException e) {
+                    for (Thread thread : threadList) {
+                        thread.join(); // Wait for all threads to finish
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
                     Thread.currentThread().interrupt();
-                    throw new ThreadManagementException("The threads are interrupted -"+e.getMessage());
-
+                } finally {
+                    isSystemRunning = false; // Set status to stopped
                 }
-            }
+            }).start();
+        }
+        catch (Exception e) {
+            isSystemRunning = false;
+            throw new ThreadManagementException(e.getMessage());
+        }
 
 
     }
@@ -88,4 +101,5 @@ public class TicketManagerService {
             thread.interrupt();
         }
     }
+
 }

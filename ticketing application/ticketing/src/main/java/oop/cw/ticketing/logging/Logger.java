@@ -19,4 +19,5 @@ public class Logger {
            throw new LoggerException(e.getMessage()); // Log the error if writing to the file fails
         }
     }
+
 }

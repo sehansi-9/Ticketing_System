@@ -24,13 +24,21 @@ public class TicketWebController {
         this.ticketManagerService = ticketManagerService;
         this.config = Configuration.loadFromFile(configFile);
     }
+
     @GetMapping("/info")
     public int[] ticketPoolInfo (){
+        if (isNull(configFile) == null) {
+            System.out.println("Config file not found");
+            return new int[0];
+        }
         return new int[]{config.getTicketPool().getMaxTicketCapacity(),config.getTicketPool().getTicketReleaseRate(),config.getTicketPool().getCustomerRetrievalRate()};
     }
 
     @PostMapping("/addcustomer")
     public String addCustomer( @RequestParam String customerName, @RequestParam int tickets) {
+        if (isNull(configFile) == null) {
+            return "Config file not found";
+        }
         Customer customer = new Customer(config.getCustomers().size() + 1, customerName, tickets);
         config.addCustomer(customer);
         config.saveToFile(configFile);
@@ -39,6 +47,9 @@ public class TicketWebController {
 
     @PostMapping("/addvendor")
     public String addVendor( @RequestParam String vendorName, @RequestParam int tickets) {
+        if (isNull(configFile) == null){
+            return "Config file not found";
+        }
         Vendor vendor = new Vendor(config.getVendors().size() + 1, vendorName, tickets);
         config.addVendor(vendor);
         config.saveToFile(configFile);
@@ -47,14 +58,10 @@ public class TicketWebController {
 
     @PostMapping("/start")
     public String startSimulation () throws ThreadManagementException {
-        Configuration updatedConfig = null;
-        File configFileObj = new File(configFile);
-        if (configFileObj.exists() && configFileObj.length() > 0) {
-            updatedConfig = Configuration.loadFromFile(configFile);
-        }
-        if (updatedConfig == null) {
+        if (isNull(configFile) == null) {
             return "No details available, Enter details in cli";
         }
+        Configuration updatedConfig = Configuration.loadFromFile(configFile);
         ticketManagerService.setCustomers(updatedConfig.getCustomers());
         ticketManagerService.setVendors(updatedConfig.getVendors());
         ticketManagerService.startThreads();
@@ -67,6 +74,14 @@ public class TicketWebController {
         return "Threads stopped successfully!";
     }
 
+    public Configuration isNull(String file) {
+        Configuration updatedConfig = null;
+        File configFileObj = new File(file);
+        if (configFileObj.exists() && configFileObj.length() > 0) {
+            return updatedConfig= Configuration.loadFromFile(file);
+        }
+        else return null;
+    }
 
 
 }
