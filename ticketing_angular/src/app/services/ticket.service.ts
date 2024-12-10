@@ -1,23 +1,29 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common'; //to stop httpclient from attempting to use xmlhttprequest in sprinboot server
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 @Injectable({
   providedIn: 'root'  // This ensures the service is available app-wide
 })
 export class TicketService {
   private apiUrl = 'http://localhost:8080/api/info'; 
   private addCustomerUrl = 'http://localhost:8080/api/addcustomer'; 
-  private addVendorUrl = 'http://localhost:8080/api/addvendor';      
+  private addVendorUrl = 'http://localhost:8080/api/addvendor';   
+  private startSystemUrl = 'http://localhost:8080/api/start';
+
+  private webSocketUrl = 'ws://localhost:8080/ws/logs'
+  private logSocket$!: WebSocketSubject<string>;
+  private logsSubject = new Subject<string>()
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   getPoolInfo(): Observable<any> {
-    // Check if the code is running in the browser
+  
     if (isPlatformBrowser(this.platformId)) {
       return this.http.get<any>(this.apiUrl);
     }
-    return new Observable();  // Return an empty Observable if not in the browser
+    return new Observable(); 
   }
 
   addCustomer(customerName: string, tickets: number): Observable<any> {
@@ -36,4 +42,56 @@ export class TicketService {
     }
     return new Observable();
   }
+
+
+connectWebSocket(): void {
+  if (!this.logSocket$ || this.logSocket$.closed) {
+    console.log('Attempting to connect to WebSocket...');
+    
+   
+    this.logSocket$ = webSocket<string>({
+      url: this.webSocketUrl,
+      deserializer: (msg: MessageEvent) => msg.data as string  
+    });
+
+    this.logSocket$.subscribe({
+      next: (message: string) => {
+        console.log('Received message:', message);
+        this.logsSubject.next(message); 
+      },
+      error: (err) => {
+        console.error('WebSocket error', err);
+      },
+      complete: () => {
+        console.warn('WebSocket connection closed');
+      },
+    });
+  }
+}
+
+  
+
+  getLogs(): Observable<string> {
+    if (isPlatformBrowser(this.platformId)) {
+      return this.logsSubject.asObservable();
+    }
+    return new Observable();
+    
+  }
+
+  disconnectWebSocket(): void {
+    if (this.logSocket$) {
+      this.logSocket$.complete();
+    }
+  }
+
+  startSystem(): Observable<any> {
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.post<any>(this.startSystemUrl, {}, { responseType: 'text' as 'json' });
+    }
+    return new Observable();
+  }
+
+
+
 }

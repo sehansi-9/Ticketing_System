@@ -26,11 +26,7 @@ public class TicketManagerService {
 
         this.ticketPool = ticketPool;
     }
-    private volatile boolean isSystemRunning = false;
 
-    public boolean isSystemRunning() {
-        return isSystemRunning;
-    }
     ArrayList<Thread> threadList = new ArrayList<>();
 
     @PostConstruct
@@ -52,7 +48,7 @@ public class TicketManagerService {
     }
 
         public void startThreads() throws ThreadManagementException {
-        try {
+
             for (Vendor vendor : vendors) {
                 vendor.setTicketPool(ticketPool);
                 Thread thread = new Thread(vendor);
@@ -68,23 +64,6 @@ public class TicketManagerService {
             for (Thread thread : threadList) {
                 thread.start();
             }
-            new Thread(() -> {
-                try {
-                    for (Thread thread : threadList) {
-                        thread.join(); // Wait for all threads to finish
-                    }
-                } catch (InterruptedException e) {
-                    System.out.println(e.getMessage());
-                    Thread.currentThread().interrupt();
-                } finally {
-                    isSystemRunning = false; // Set status to stopped
-                }
-            }).start();
-        }
-        catch (Exception e) {
-            isSystemRunning = false;
-            throw new ThreadManagementException(e.getMessage());
-        }
 
 
     }

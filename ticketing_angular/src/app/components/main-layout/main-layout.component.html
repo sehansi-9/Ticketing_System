@@ -6,3 +6,5 @@
     <p><strong>Customer Retrieval Rate:</strong> every {{ customerRetrievalRate }} seconds</p>
   </div>
   <app-configuration-form [maxCapacity]="maxTicketCapacity"></app-configuration-form>
+
+<app-ticket-status *ngIf="isFormSubmitted"></app-ticket-status>

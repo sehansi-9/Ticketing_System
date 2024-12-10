@@ -22,6 +22,7 @@ export class ConfigurationFormComponent {
   isCustomerFormVisible: boolean = false;
 
   formDisabled: boolean= false;
+  isFormSubmitted: boolean = false;
 
   constructor(private ticketService: TicketService) {}
 
@@ -45,6 +46,7 @@ export class ConfigurationFormComponent {
         (response) => {
           alert("Your request accepted, click on 'start' to release to the pool");
           console.log(response);
+          this.isFormSubmitted = true;
         },
         (error) => {
           alert("Your request denied, please try again");
@@ -59,6 +61,7 @@ export class ConfigurationFormComponent {
         (response) => {
           alert("Your request accepted, click on 'start' to initiate buying");
           console.log(response);
+          this.isFormSubmitted = true;
         },
         (error) => {
           alert("Your request denied, please try again");

@@ -5,10 +5,16 @@ import oop.cw.ticketing.exceptions.ThreadManagementException;
 import oop.cw.ticketing.service.TicketManagerService;
 import oop.cw.ticketing.threads.Customer;
 import oop.cw.ticketing.threads.Vendor;
+import oop.cw.ticketing.websocket.LogWebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -19,10 +25,11 @@ public class TicketWebController {
     private final Configuration config;
     private final TicketManagerService ticketManagerService;
 
-    @Autowired
+
     public TicketWebController(TicketManagerService ticketManagerService) {
         this.ticketManagerService = ticketManagerService;
         this.config = Configuration.loadFromFile(configFile);
+
     }
 
     @GetMapping("/info")
@@ -65,12 +72,26 @@ public class TicketWebController {
         ticketManagerService.setCustomers(updatedConfig.getCustomers());
         ticketManagerService.setVendors(updatedConfig.getVendors());
         ticketManagerService.startThreads();
-        return "Threads started successfully!";
+
+        try {
+            LogWebSocketHandler.broadcastLog("Ticket simulation started!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to send log via WebSocket.";
+        }
+
+        return "success";
+
     }
 
     @PostMapping("/stop")
     public String stopSimulation () {
         ticketManagerService.stopThreads();
+        try {
+            LogWebSocketHandler.broadcastLog("Ticket simulation stopped!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "Threads stopped successfully!";
     }
 
