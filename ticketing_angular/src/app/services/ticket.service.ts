@@ -92,6 +92,12 @@ connectWebSocket(): void {
     return new Observable();
   }
 
+  stopSystem(): Observable<any> {
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.post<any>(this.startSystemUrl, {}, { responseType: 'text' as 'json' });
+    }
+    return new Observable();
+  }
 
 
 }

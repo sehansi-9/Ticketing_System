@@ -1,7 +1,8 @@
-<button (click)="startSystem()">Start Simulation</button>
+<button [disabled]="isButtonDisabled"  (click)="startSystem()">Start</button>
 <div>
   <h3>Logs:</h3>
   <ul>
     <li *ngFor="let log of logs">{{ log }}</li>
   </ul>
 </div>
+<button (click)="stopSystem()">Stop</button>

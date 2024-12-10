@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 
 public class Logger {
     private static final String LOG_FILE = "logs.txt";
+    private static final Object lock = new Object();
 
 
 
@@ -19,11 +20,13 @@ public class Logger {
         System.out.println(timeStampedMessage);
 
 
+        synchronized (lock) {
             try {
                 LogWebSocketHandler.broadcastLog(timeStampedMessage);
             } catch (Exception e) {
-                throw new LoggerException("Could not send transaction details to the web "+e.getMessage());
+                throw new LoggerException("Could not send transaction details to the web: " + e.getMessage());
             }
+        }
 
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))) {

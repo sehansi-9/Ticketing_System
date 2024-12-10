@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class TicketStatusComponent implements OnInit, OnDestroy{
   logs: string[] = [];
   private logsSubscription: Subscription | null = null;
+  isButtonDisabled: boolean = false;
 
   constructor(private ticketService: TicketService) {}
 
@@ -23,12 +24,24 @@ export class TicketStatusComponent implements OnInit, OnDestroy{
 }
 
 startSystem(): void {
+  this.isButtonDisabled = true;
   this.ticketService.startSystem().subscribe({
     next: (response) => {
       console.log('Simulation started:', response);
     },
     error: (err) => {
       console.error('Error starting simulation:', err);
+    }
+  });
+}
+
+stopSystem(): void {
+  this.ticketService.stopSystem().subscribe({
+    next: (response) => {
+      console.log('Simulation stopped:', response);
+    },
+    error: (err) => {
+      console.error('Error stopping simulation:', err);
     }
   });
 }

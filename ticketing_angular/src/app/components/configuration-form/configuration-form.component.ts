@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { TicketService } from '../../services/ticket.service';
+import { TicketStatusComponent } from '../ticket-status/ticket-status.component';
 
 @Component({
   selector: 'app-configuration-form',
   standalone: true,
-  imports: [CommonModule,  FormsModule],
+  imports: [CommonModule,  FormsModule, TicketStatusComponent],
   templateUrl: './configuration-form.component.html',
   styleUrl: './configuration-form.component.css'
 })

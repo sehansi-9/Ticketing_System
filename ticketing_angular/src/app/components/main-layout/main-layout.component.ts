@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../../services/ticket.service'; 
 import { ConfigurationFormComponent } from '../configuration-form/configuration-form.component';
-import { TicketStatusComponent } from '../ticket-status/ticket-status.component';
+
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [ConfigurationFormComponent, TicketStatusComponent],
+  imports: [ConfigurationFormComponent],
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.css']
 })
