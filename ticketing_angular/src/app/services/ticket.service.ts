@@ -11,6 +11,8 @@ export class TicketService {
   private addCustomerUrl = 'http://localhost:8080/api/addcustomer'; 
   private addVendorUrl = 'http://localhost:8080/api/addvendor';   
   private startSystemUrl = 'http://localhost:8080/api/start';
+  private stopSystemUrl = 'http://localhost:8080/api/stop';
+  private getNameUrl = 'http://localhost:8080/api/name';
 
   private webSocketUrl = 'ws://localhost:8080/ws/logs'
   private logSocket$!: WebSocketSubject<string>;
@@ -24,6 +26,13 @@ export class TicketService {
       return this.http.get<any>(this.apiUrl);
     }
     return new Observable(); 
+  }
+
+  getPoolName(): Observable<string> {
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.get(this.getNameUrl, { responseType: 'text' });
+    }
+    return new Observable<string>(); // Return an observable with a string type
   }
 
   addCustomer(customerName: string, tickets: number): Observable<any> {
@@ -94,7 +103,7 @@ connectWebSocket(): void {
 
   stopSystem(): Observable<any> {
     if (isPlatformBrowser(this.platformId)) {
-      return this.http.post<any>(this.startSystemUrl, {}, { responseType: 'text' as 'json' });
+      return this.http.post<any>(this.stopSystemUrl, {}, { responseType: 'text' as 'json' });
     }
     return new Observable();
   }

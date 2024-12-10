@@ -13,7 +13,9 @@ import { CommonModule } from '@angular/common';
 export class TicketStatusComponent implements OnInit, OnDestroy{
   logs: string[] = [];
   private logsSubscription: Subscription | null = null;
-  isButtonDisabled: boolean = false;
+  isStartButtonDisabled: boolean = false;
+  isStopButtonDisabled: boolean = true;
+  
 
   constructor(private ticketService: TicketService) {}
 
@@ -24,7 +26,8 @@ export class TicketStatusComponent implements OnInit, OnDestroy{
 }
 
 startSystem(): void {
-  this.isButtonDisabled = true;
+  this.isStartButtonDisabled = true;
+  this.isStopButtonDisabled = false;
   this.ticketService.startSystem().subscribe({
     next: (response) => {
       console.log('Simulation started:', response);
@@ -36,6 +39,7 @@ startSystem(): void {
 }
 
 stopSystem(): void {
+  this.isStopButtonDisabled = true;
   this.ticketService.stopSystem().subscribe({
     next: (response) => {
       console.log('Simulation stopped:', response);

@@ -1,14 +1,13 @@
-<div>
-    <!-- Tabs to Switch Between Forms -->
-    <button (click)="showVendorForm()" >Vendor</button>
-    <button (click)="showCustomerForm()">Customer</button>
-  </div>
+<div class="tab-container">
+  <button class="tab-button" (click)="showVendorForm()">Vendor</button>
+  <button class="tab-button" (click)="showCustomerForm()">Customer</button>
+</div>
 
-  <div *ngIf="isVendorFormVisible">
-    <h3>Vendor Form</h3>
+<div class="form-container">
+  <div class="form" *ngIf="isVendorFormVisible">
+    <h3>Vendor Details</h3>
     <form (ngSubmit)="submitForm()">
-      <!-- Vendor String Input -->
-      <div class="input-field">
+      <div class="input-group">
         <label for="vendorName">Vendor Name:</label>
         <input
           id="vendorName"
@@ -24,71 +23,70 @@
         </div>
       </div>
 
-      <div class="input-field">
-        <label for="vendorCapacity"> Amount of Tickets to release: </label>
+      <div class="input-group">
+        <label for="vendorCapacity">Amount of Tickets to Release:</label>
         <input
-        id="vendorCapacity"
-        type="number"
-        [(ngModel)]="vendorCapacity"
-        name="vendorCapacity"
-        [min]="1"
-        [max]="maxCapacity"
-        #vendorCapacityInput="ngModel"
-        [disabled]="formDisabled"
+          id="vendorCapacity"
+          type="number"
+          [(ngModel)]="vendorCapacity"
+          name="vendorCapacity"
+          [min]="1"
+          [max]="maxCapacity"
+          #vendorCapacityInput="ngModel"
+          [disabled]="formDisabled"
         />
         <div class="warning" *ngIf="vendorCapacityInput.invalid && vendorCapacityInput.touched">
-            Ticket amount should not exceed the maximum tickets available to be released
+          Ticket amount should not exceed the maximum tickets available.
         </div>
-       </div> 
-       <button type="submit" [disabled]="!vendorName || !vendorCapacity || vendorCapacity > maxCapacity || formDisabled">
-        Submit Vendor Form
+      </div>
+
+      <button class="submit-button" type="submit" [disabled]="!vendorName || !vendorCapacity || vendorCapacity > maxCapacity || formDisabled">
+        RELEASE
       </button>
+    </form>
+  </div>
 
-       </form>
-
-       </div>
-
-
-      <div *ngIf="isCustomerFormVisible">
-        <h3>Customer Form</h3>
-        <form (ngSubmit)="submitForm()">
-          <!-- Vendor String Input -->
-          <div>
-            <label for="customerName">Customer Name:</label>
-            <input
-              id="customerName"
-              type="text"
-              name="customerName"
-              [(ngModel)]="customerName"
-              required
-              #customerNameInput="ngModel"
-              [disabled]="formDisabled"
-            />
-            <div *ngIf="customerNameInput.invalid && customerNameInput.touched">
-              Name is required!
-            </div>
-          </div>
-
-          <div class="input-field">
-            <label for="customerCapacity"> Amount of Tickets to buy: </label>
-            <input
-            id="customerCapacity"
-            type="number"
-            [(ngModel)]="customerCapacity"
-            name="customerCapacity"
-            [min]="1"
-            [max]="maxCapacity"
-            #customerCapacityInput="ngModel"
-            [disabled]="formDisabled"
-            />
-            <div class="warning" *ngIf="customerCapacityInput.invalid && customerCapacityInput.touched">
-                Ticket amount should not exceed the tickets available to purcahse
-            </div>
-           </div>
-           <button type="submit" [disabled]="!customerName || !customerCapacity || customerCapacity > maxCapacity || formDisabled">
-            Submit Customer Form
-          </button>
-          
-        </form>  
+  <div class="form" *ngIf="isCustomerFormVisible">
+    <h3>Customer Details</h3>
+    <form (ngSubmit)="submitForm()">
+      <div class="input-group">
+        <label for="customerName">Customer Name:</label>
+        <input
+          id="customerName"
+          type="text"
+          name="customerName"
+          [(ngModel)]="customerName"
+          required
+          #customerNameInput="ngModel"
+          [disabled]="formDisabled"
+        />
+        <div class="warning" *ngIf="customerNameInput.invalid && customerNameInput.touched">
+          Name is required!
         </div>
-        <app-ticket-status *ngIf="isFormSubmitted"></app-ticket-status>
+      </div>
+
+      <div class="input-group">
+        <label for="customerCapacity">Amount of Tickets to Buy:</label>
+        <input
+          id="customerCapacity"
+          type="number"
+          [(ngModel)]="customerCapacity"
+          name="customerCapacity"
+          [min]="1"
+          [max]="maxCapacity"
+          #customerCapacityInput="ngModel"
+          [disabled]="formDisabled"
+        />
+        <div class="warning" *ngIf="customerCapacityInput.invalid && customerCapacityInput.touched">
+          Ticket amount should not exceed the maximum tickets available.
+        </div>
+      </div>
+
+      <button class="submit-button" type="submit" [disabled]="!customerName || !customerCapacity || customerCapacity > maxCapacity || formDisabled">
+        BUY
+      </button>
+    </form>
+  </div>
+</div>
+
+  <app-ticket-status *ngIf="isFormSubmitted"></app-ticket-status>

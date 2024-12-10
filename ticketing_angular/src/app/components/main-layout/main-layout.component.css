@@ -1,0 +1,62 @@
+.body{
+    background-image: url('https://img.freepik.com/free-vector/cool-wavy-abstract-gradient_53876-93826.jpg');
+    background-size: cover; /* Optional, for covering the entire element */
+    background-position: center; /* Optional, for centering the image */
+    background-repeat: no-repeat;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4e5b6e;
+  }
+  
+  .ticket-info {
+    background-color: #e7f0fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ticket-info h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .ticket-info p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 5px 0;
+  }
+  
+  .ticket-info strong {
+    font-weight: 600;
+    color: #34495e;
+  }
+  
+  app-configuration-form {
+    display: block;
+    margin-top: 30px;
+  }
+  
+
+  

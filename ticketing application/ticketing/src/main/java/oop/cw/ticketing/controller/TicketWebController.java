@@ -1,20 +1,16 @@
 package oop.cw.ticketing.controller;
 
 import oop.cw.ticketing.config.Configuration;
+import oop.cw.ticketing.exceptions.LoggerException;
 import oop.cw.ticketing.exceptions.ThreadManagementException;
 import oop.cw.ticketing.service.TicketManagerService;
 import oop.cw.ticketing.threads.Customer;
 import oop.cw.ticketing.threads.Vendor;
 import oop.cw.ticketing.websocket.LogWebSocketHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -39,6 +35,14 @@ public class TicketWebController {
             return new int[0];
         }
         return new int[]{config.getTicketPool().getMaxTicketCapacity(),config.getTicketPool().getTicketReleaseRate(),config.getTicketPool().getCustomerRetrievalRate()};
+    }
+    @GetMapping("/name")
+    public String ticketPoolName (){
+        if (isNull(configFile) == null) {
+            System.out.println("Config file not found");
+            return null;
+        }
+        return config.getTicketPool().getEvent();
     }
 
     @PostMapping("/addcustomer")
@@ -76,8 +80,7 @@ public class TicketWebController {
         try {
             LogWebSocketHandler.broadcastLog("Ticket simulation started!");
         } catch (IOException e) {
-            e.printStackTrace();
-            return "Failed to send log via WebSocket.";
+            throw new LoggerException("Failed to send log via WebSocket");
         }
 
         return "success";
@@ -90,7 +93,7 @@ public class TicketWebController {
         try {
             LogWebSocketHandler.broadcastLog("Ticket simulation stopped!");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LoggerException("Failed to send log via WebSocket");
         }
         return "Threads stopped successfully!";
     }
