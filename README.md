@@ -62,7 +62,7 @@ Now, you can interact with the system via the frontend, which communicates with 
 ### Explanation of UI
 
 - Pool details: The web page displays the ticket pool configurations including name, maximum capacity, customer buying rate and vendor releasing rate
-- Form: To eEnter a customer/vendor name and number of tickets to buy/release
+- Form: To Enter a customer/vendor name and number of tickets to buy/release
 - Start: Initiates the ticket pool.
 - Stop: Halts the simulation and interrupts all active threads.
 - Logs: View real-time updates from the system via WebSockets.
