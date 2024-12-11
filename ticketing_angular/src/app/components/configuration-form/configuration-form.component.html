@@ -13,7 +13,7 @@
           id="vendorName"
           type="text"
           name="vendorName"
-          [(ngModel)]="vendorName"
+          [(ngModel)]="vendorName" 
           required
           #vendorNameInput="ngModel"
           [disabled]="formDisabled"
@@ -36,7 +36,7 @@
           [disabled]="formDisabled"
         />
         <div class="warning" *ngIf="vendorCapacityInput.invalid && vendorCapacityInput.touched">
-          Ticket amount should not exceed the maximum tickets available.
+          amount should be valid and not exceed the maximum tickets available.
         </div>
       </div>
 
@@ -78,7 +78,7 @@
           [disabled]="formDisabled"
         />
         <div class="warning" *ngIf="customerCapacityInput.invalid && customerCapacityInput.touched">
-          Ticket amount should not exceed the maximum tickets available.
+          amount should be valid and not exceed the maximum tickets available.
         </div>
       </div>
 

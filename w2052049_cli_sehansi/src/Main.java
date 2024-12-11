@@ -38,14 +38,14 @@ public class Main {
 
         // Create threads for each vendor and add them to the thread list
         for (int i = 0; i < info.getVendors().size(); i++) {
-            Vendor vendor = new Vendor(event1,info.getVendors().get(i).getVendorID(),info.getVendors().get(i).getVendorName(), info.getVendors().get(i).getTicketBatchSize());
+            Vendor vendor = new Vendor(event1, info.getVendors().get(i).getID(), info.getVendors().get(i).getName(), info.getVendors().get(i).getTicketBatchSize());
             Thread thread = new Thread(vendor);
             threadList.add(thread);
         }
 
         // Create threads for each customer and add them to the thread list
         for (int i = 0; i < info.getCustomers().size(); i++) {
-            Customer customer = new Customer(event1,info.getCustomers().get(i).getCustomerID() ,info.getCustomers().get(i).getCustomerName(), info.getCustomers().get(i).getTicketBatchSize());
+            Customer customer = new Customer(event1, info.getCustomers().get(i).getID(), info.getCustomers().get(i).getName(), info.getCustomers().get(i).getTicketBatchSize());
             Thread thread = new Thread(customer);
             threadList.add(thread);
         }
@@ -56,13 +56,13 @@ public class Main {
             public void run() {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Type 'x' and enter key to stop the system ");
-                    String command = scanner.next();
-                    if (command.equalsIgnoreCase("x")) {
-                        for (Thread thread : threadList) {
-                            thread.interrupt();
-                        }
-                        System.out.println("Stopping threads...");
+                String command = scanner.next();
+                if (command.equalsIgnoreCase("x")) {
+                    for (Thread thread : threadList) {
+                        thread.interrupt();
                     }
+                    System.out.println("Stopping threads...");
+                }
 
             }
         };
@@ -83,18 +83,16 @@ public class Main {
 
             try {
                 stopCommandThread.join();
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 throw new ThreadManagementException("Error while joining the stop command thread");
             }
 
             for (Thread thread : threadList) {
                 try {
                     thread.join();
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    throw new ThreadManagementException("Error while joining customer and vendor threads"+e.getMessage());
+                    throw new ThreadManagementException("Error while joining customer and vendor threads" + e.getMessage());
                 }
             }
 
@@ -104,7 +102,6 @@ public class Main {
 
 
     }
-
 
 
 }

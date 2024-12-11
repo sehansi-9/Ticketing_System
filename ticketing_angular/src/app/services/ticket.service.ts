@@ -32,7 +32,7 @@ export class TicketService {
     if (isPlatformBrowser(this.platformId)) {
       return this.http.get(this.getNameUrl, { responseType: 'text' });
     }
-    return new Observable<string>(); // Return an observable with a string type
+    return new Observable<string>(); //return an observable with a string type
   }
 
   addCustomer(customerName: string, tickets: number): Observable<any> {
@@ -60,10 +60,10 @@ connectWebSocket(): void {
    
     this.logSocket$ = webSocket<string>({
       url: this.webSocketUrl,
-      deserializer: (msg: MessageEvent) => msg.data as string  
+      deserializer: (msg: MessageEvent) => msg.data as string  // recieving socket messages as strings
     });
 
-    this.logSocket$.subscribe({
+    this.logSocket$.subscribe({ //retrieving data from the logs socket subject type observable
       next: (message: string) => {
         console.log('Received message:', message);
         this.logsSubject.next(message); 

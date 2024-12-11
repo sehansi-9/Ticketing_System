@@ -1,64 +1,40 @@
 package threads;
 
+import core.Participant;
 import core.TicketPool;
 import logging.Logger;
 
 /**
  * The Customer class represents a customer attempting to purchase tickets from a TicketPool.
- * This class implements the Runnable interface to enable concurrent execution of multiple customer threads.
+ * This class extends the Participant Abstract class
+ * The Customer class interacts with the TicketPool to try purchasing a batch of tickets and logs the result of the transaction.
  */
-public class Customer implements Runnable {
-    private TicketPool ticketpool;
-    private final int customerID;
-    private String customerName;
-    private int ticketBatchSize;
+public class Customer extends Participant {
+    /**
+     * Constructs a Customer instance with the specified ticket pool, customer ID, name, and ticket batch size.
+     *
+     * @param ticketpool      The TicketPool from which the customer will purchase tickets.
+     * @param customerID      The unique identifier for the customer.
+     * @param customerName    The name of the customer.
+     * @param ticketBatchSize The number of tickets the customer intends to purchase.
+     */
+    public Customer(TicketPool ticketpool, int customerID, String customerName, int ticketBatchSize) {
+        super(ticketpool, customerID, customerName, ticketBatchSize);
+
+    }
 
     /**
-     * Constructs a Customer object with the specified ticket pool, customer ID, name, and ticket batch size.
+     * Constructs a Customer instance with the specified customer ID, name, and ticket batch size.
+     * This constructor is used to store a customer in the configuration file without associating them with a ticket pool at this stage,
+     * assuming only one pool exists for simplification.
      *
-     * @param ticketpool The TicketPool from which the customer will purchase tickets.
-     * @param id The unique identifier for the customer.
-     * @param customerName The name of the customer.
-     * @param ticketBatchSize The number of tickets the customer intends to purchase, the batchsize
+     * @param customerID      The unique identifier for the customer.
+     * @param name            The name of the customer.
+     * @param ticketBatchSize The number of tickets the customer intends to purchase.
      */
-    public Customer(TicketPool ticketpool, int id, String customerName, int ticketBatchSize) {
-        this.ticketpool = ticketpool;
-        customerID = id;
-        this.customerName = customerName;
-        this.ticketBatchSize = ticketBatchSize;
+    public Customer(int customerID, String name, int ticketBatchSize) {
+        super(customerID, name, ticketBatchSize);
 
-    }
-    /**
-     * Constructs a Customer object with the specified customer ID, name, and ticket batch size.
-     * This constructor is used to store a customer to config file without a ticketpool at this stage
-     * assuming only one pool exists (for simplification and clarity)
-     *
-     * @param customerID The unique identifier for the customer.
-     * @param name The name of the customer.
-     * @param ticketAmount The number of tickets the customer intends to purchase.
-     */
-    public Customer(int customerID, String name, int ticketAmount) {
-        this.customerID = customerID;
-        customerName = name;
-        ticketBatchSize = ticketAmount;
-
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-    public String getCustomerName() {
-        return customerName;
-    }
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public int getTicketBatchSize() {
-        return ticketBatchSize;
-    }
-    public void setTicketBatchSize(int ticketBatchSize) {
-        this.ticketBatchSize = ticketBatchSize;
     }
 
     /**
@@ -68,26 +44,25 @@ public class Customer implements Runnable {
      * A log message finally includes the summary of the transactions, if the intended amount is purchased, ticket pool
      * is sold out or the thread is interrupted
      */
-    @Override
+
     public void run() {
         int ticketsPurchasedByBuyer = 0;
         try {
-                while (ticketsPurchasedByBuyer < ticketBatchSize && !ticketpool.isSoldOut() ) {
-                    boolean removed = ticketpool.removeTicket(customerName);
-                    if (removed) {
-                        ticketsPurchasedByBuyer++;
-                    } else {
-                        break;
-                    }
-                    Thread.sleep(ticketpool.getCustomerRetrievalRate()); // Simulate time for ticket purchase
+            while (ticketsPurchasedByBuyer < ticketBatchSize && !ticketpool.isSoldOut()) {
+                boolean removed = super.ticketpool.removeTicket(name);
+                if (removed) {
+                    ticketsPurchasedByBuyer++;
+                } else {
+                    break;
                 }
+                Thread.sleep(ticketpool.getCustomerRetrievalRate()); // Simulate time for ticket purchase
+            }
 
         } catch (InterruptedException e) {
-            System.out.println(customerName + " was interrupted and has stopped.");
+            System.out.println(name + " was interrupted and has stopped.");
 
-        }
-        finally{
-            Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + customerName + " purchased " + ticketsPurchasedByBuyer + " tickets from " + ticketBatchSize + " requested.");
+        } finally {
+            Logger.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Summary: " + name + " purchased " + ticketsPurchasedByBuyer + " tickets from " + ticketBatchSize + " requested.");
         }
     }
 

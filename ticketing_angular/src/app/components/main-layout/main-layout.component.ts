@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../../services/ticket.service'; 
 import { ConfigurationFormComponent } from '../configuration-form/configuration-form.component';
-import { error } from 'console';
 
 @Component({
   selector: 'app-main-layout',
@@ -19,7 +18,7 @@ export class MainLayoutComponent implements OnInit {
   constructor(private ticketService: TicketService) { }
 
   ngOnInit(): void {
-    // Fetch the data using the service
+  
     this.ticketService.getPoolInfo().subscribe(
       (data) => {
         

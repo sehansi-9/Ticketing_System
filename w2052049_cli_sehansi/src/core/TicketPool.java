@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class TicketPool {
     private String event;
-    private int maxTicketCapacity;
+    private final int maxTicketCapacity;
     private int totalTickets;
     private final List<Integer> tickets = Collections.synchronizedList(new LinkedList<>());
-    private int customerRetrievalRate;
-    private int ticketReleaseRate;
+    private final int customerRetrievalRate;
+    private final int ticketReleaseRate;
 
     /**
      * Constructs a TicketPool object for the given event with specified ticket capacity
@@ -49,24 +49,12 @@ public class TicketPool {
         return maxTicketCapacity;
     }
 
-    public void setMaxTicketCapacity(int maxTicketCapacity) {
-        this.maxTicketCapacity = maxTicketCapacity;
-    }
-
     public int getCustomerRetrievalRate() {
         return customerRetrievalRate;
     }
 
-    public void setCustomerRetrievalRate(int customerRetrievalRate) {
-        this.customerRetrievalRate = customerRetrievalRate;
-    }
-
     public int getTicketReleaseRate() {
         return ticketReleaseRate;
-    }
-
-    public void setTicketReleaseRate(int ticketReleaseRate) {
-        this.ticketReleaseRate = ticketReleaseRate;
     }
 
 
@@ -118,7 +106,7 @@ public class TicketPool {
 
     }
     /**
-     * Checks if the ticket pool is full (whether the total tickets are equal to the max capacity).
+     * Checks if the ticket pool is full (whether the total tickets added are equal to the max capacity).
      *
      * @return true if the pool is full, false otherwise.
      */

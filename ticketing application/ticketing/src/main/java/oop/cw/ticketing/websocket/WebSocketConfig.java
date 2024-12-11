@@ -13,6 +13,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(new LogWebSocketHandler(), "/ws/logs")
-                .setAllowedOrigins("http://localhost:4200");
+                .setAllowedOrigins("http://localhost:4200"); //configuring the angular frontend port
     }
 }

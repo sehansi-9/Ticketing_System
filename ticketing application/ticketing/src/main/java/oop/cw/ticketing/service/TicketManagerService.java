@@ -13,6 +13,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class that manages the ticket pool and coordinates the threads for vendors and customers.
+ *
+ * The {@link TicketManagerService} is responsible for initializing the ticket pool configuration,
+ * starting the vendor and customer threads, and stopping those threads when necessary.
+ *
+ * This service uses Spring's {@link Service} annotation to handle the ticket pool management
+ * and interact with vendors and customers through thread management.
+ */
 @Service
 public class TicketManagerService {
 
@@ -27,8 +36,25 @@ public class TicketManagerService {
         this.ticketPool = ticketPool;
     }
 
+    //thread list to store initaited threads
     ArrayList<Thread> threadList = new ArrayList<>();
 
+    //setter methods
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public void setVendors(List<Vendor> vendors) {
+        this.vendors = vendors;
+    }
+
+    /**
+     * Initializes the ticket pool configuration by loading it from a configuration file and
+     * setting up the event, ticket capacity, customer retrieval rate, and ticket release rate.
+     * It also loads the customer and vendor lists from the configuration.
+     *
+     * @throws ConfigurationException if the configuration loading fails.
+     */
     @PostConstruct
     public void init() {
         try {
@@ -46,7 +72,12 @@ public class TicketManagerService {
             throw new ConfigurationException(e.getMessage());
         }
     }
-
+    /**
+     * Starts the threads for all vendors and customers. Each vendor and customer is assigned a thread
+     * to simulate their actions, and all threads are started concurrently.
+     *
+     * @throws ThreadManagementException if there is an issue with managing the threads.
+     */
         public void startThreads() throws ThreadManagementException {
 
             for (Vendor vendor : vendors) {
@@ -65,15 +96,8 @@ public class TicketManagerService {
                 thread.start();
             }
 
-
     }
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
-    }
-
-    public void setVendors(List<Vendor> vendors) {
-        this.vendors = vendors;
-    }
+    //stops all threads by interrupting them
     public void stopThreads() {
 
         for (Thread thread : threadList) {

@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TicketStatusComponent implements OnInit, OnDestroy{
   logs: string[] = [];
-  private logsSubscription: Subscription | null = null;
+  private logsSubscription!: Subscription;
   isStartButtonDisabled: boolean = false;
   isStopButtonDisabled: boolean = true;
   
